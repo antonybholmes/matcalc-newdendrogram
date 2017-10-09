@@ -45,7 +45,7 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
 				NAME,
 				"Cluster rows and columns using the New Dendrogam method.");
 		button.addClickListener(this);
-		mWindow.getRibbon().getHomeToolbar().getSection("Tools").add(button);
+		mWindow.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
 	}
 
 	@Override

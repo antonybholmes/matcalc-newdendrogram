@@ -68,7 +68,7 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
 			new ModernCompactSpinner(0, 10000, 1.5, 0.1);
 
 	private CheckBox mCheckPlot = 
-			new ModernCheckSwitch(PlotConstants.MENU_SHOW_HEATMAP, true);
+			new ModernCheckSwitch(PlotConstants.MENU_PLOT, true);
 
 	private CheckBox mCheckReset = 
 			new ModernCheckSwitch(PlotConstants.MENU_RESET_HISTORY, false);
@@ -116,7 +116,7 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
 		mExpressionField.setValue(SettingsService.getInstance().getAsDouble("newdendrogram.min-expression"));
 		mStdField.setValue(SettingsService.getInstance().getAsDouble("newdendrogram.min-stdev"));
 
-		setSize(600, 540);
+		setSize(600, 600);
 
 		UI.centerWindowToScreen(this);
 	}
@@ -155,7 +155,7 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
 		box.add(UI.createVGap(5));
 		box.add(mCheckOptimalLeafOrder);
 		
-		box.add(UI.createVGap(40));
+		box.add(UI.createVGap(20));
 		box.add(mCheckPlot);
 		
 		setDialogCardContent(box);
