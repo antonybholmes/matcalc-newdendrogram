@@ -9,8 +9,8 @@ import org.jebtk.core.IndexedInt;
 import org.jebtk.math.MathUtils;
 import org.jebtk.math.cluster.DistanceMetric;
 import org.jebtk.math.cluster.Linkage;
-import org.jebtk.math.matrix.AnnotatableMatrix;
-import org.jebtk.math.matrix.AnnotationMatrix;
+import org.jebtk.math.matrix.DataFrame;
+import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperation;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
@@ -85,9 +85,9 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
 			mWindow.resetHistory();
 		}
 
-		AnnotationMatrix m = mWindow.getCurrentMatrix();
+		DataFrame m = mWindow.getCurrentMatrix();
 
-		AnnotationMatrix minM;
+		DataFrame minM;
 
 		if (dialog.getUseMinExp()) {
 			minM = mWindow.addToHistory("Minimum expression", 
@@ -97,7 +97,7 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
 			minM = m;
 		}
 
-		AnnotationMatrix log2M;
+		DataFrame log2M;
 
 		/*
 		switch (dialog.getIsLogTransformed()) {
@@ -138,8 +138,8 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
 		//Collections.sort(sdIndexed);
 
 		// Sort the maxtrix rows
-		AnnotationMatrix stdM = 
-				AnnotatableMatrix.copyInnerRowsIndexed(log2M, sdIndexed);
+		DataFrame stdM = 
+				DataFrame.copyInnerRowsIndexed(log2M, sdIndexed);
 
 		sd = Indexed.values(sdIndexed);
 
@@ -156,11 +156,11 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
 
 		if (sdIndexed.size() > 0) {
 
-			AnnotationMatrix stdevFilterM = 
+			DataFrame stdevFilterM = 
 					mWindow.addToHistory("Keep STDEV >= " + minStd,
-							AnnotatableMatrix.copyInnerRowsIndexed(stdM, sdIndexed)); // new StdDevFilterMatrixView(mlog2, minStd));
+							DataFrame.copyInnerRowsIndexed(stdM, sdIndexed)); // new StdDevFilterMatrixView(mlog2, minStd));
 
-			AnnotationMatrix rowZTransM = 
+			DataFrame rowZTransM = 
 					mWindow.addToHistory("Row z-score transform", 
 							MatrixOperations.rowZscore(stdevFilterM)); // new RowZTransformMatrixView(mstdevfilter));
 
