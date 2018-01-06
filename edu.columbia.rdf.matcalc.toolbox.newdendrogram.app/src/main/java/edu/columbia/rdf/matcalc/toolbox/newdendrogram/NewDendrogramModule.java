@@ -27,162 +27,139 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy.LegacyClusterModule;
 
 public class NewDendrogramModule extends CalcModule implements ModernClickListener {
-	private MainMatCalcWindow mWindow;
+  private MainMatCalcWindow mWindow;
 
-	public static final String NAME = "NewDendrogram";
-	
-	@Override
-	public String getName() {
-		return NAME;
-	}
+  public static final String NAME = "NewDendrogram";
 
-	@Override
-	public void init(MainMatCalcWindow window) {
-		mWindow = window;
+  @Override
+  public String getName() {
+    return NAME;
+  }
 
-		RibbonLargeButton button = new RibbonLargeButton(NAME,
-				UIService.getInstance().loadIcon(NewDendrogramIcon.class, 24),
-				NAME,
-				"Cluster rows and columns using the New Dendrogam method.");
-		button.addClickListener(this);
-		mWindow.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
-	}
+  @Override
+  public void init(MainMatCalcWindow window) {
+    mWindow = window;
 
-	@Override
-	public void clicked(ModernClickEvent e) {
-		try {
-			newDendrogram();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-	}
+    RibbonLargeButton button = new RibbonLargeButton(NAME,
+        UIService.getInstance().loadIcon(NewDendrogramIcon.class, 24), NAME,
+        "Cluster rows and columns using the New Dendrogam method.");
+    button.addClickListener(this);
+    mWindow.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
+  }
 
-	private void newDendrogram() throws IOException, ParseException {
-		if (mWindow.getHistoryPanel().getItemCount() == 0) {
-			return;
-		}
+  @Override
+  public void clicked(ModernClickEvent e) {
+    try {
+      newDendrogram();
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    } catch (ParseException e1) {
+      e1.printStackTrace();
+    }
+  }
 
-		NewDendrogramDialog dialog = 
-				new NewDendrogramDialog(mWindow);
+  private void newDendrogram() throws IOException, ParseException {
+    if (mWindow.getHistoryPanel().getItemCount() == 0) {
+      return;
+    }
 
-		dialog.setVisible(true);
+    NewDendrogramDialog dialog = new NewDendrogramDialog(mWindow);
 
-		if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
-			return;
-		}
+    dialog.setVisible(true);
 
-		DistanceMetric distanceMetric = dialog.getDistanceMetric();
+    if (dialog.getStatus() == ModernDialogStatus.CANCEL) {
+      return;
+    }
 
-		Linkage linkage = dialog.getLinkage();
+    DistanceMetric distanceMetric = dialog.getDistanceMetric();
 
-		double minStd = dialog.getMinStd();
+    Linkage linkage = dialog.getLinkage();
 
-		double minExp = dialog.getMinExp();
+    double minStd = dialog.getMinStd();
 
-		if (dialog.getReset()) {
-			mWindow.resetHistory();
-		}
+    double minExp = dialog.getMinExp();
 
-		DataFrame m = mWindow.getCurrentMatrix();
+    if (dialog.getReset()) {
+      mWindow.resetHistory();
+    }
 
-		DataFrame minM;
+    DataFrame m = mWindow.getCurrentMatrix();
 
-		if (dialog.getUseMinExp()) {
-			minM = mWindow.addToHistory("Minimum expression", 
-					Double.toString(minExp), 
-					MatrixOperations.min(m, minExp)); //new MinThresholdMatrixView(m, minExp));
-		} else {
-			minM = m;
-		}
+    DataFrame minM;
 
-		DataFrame log2M;
+    if (dialog.getUseMinExp()) {
+      minM = mWindow.addToHistory("Minimum expression", Double.toString(minExp), MatrixOperations.min(m, minExp)); // new
+                                                                                                                   // MinThresholdMatrixView(m,
+                                                                                                                   // minExp));
+    } else {
+      minM = m;
+    }
 
-		/*
-		switch (dialog.getIsLogTransformed()) {
-		case 1:
-			log2M = mWindow.addToHistory("Log 2 transform", 
-					MatrixOperation.transform().min(1).log2().to(minM));
-			break;
-		case 2:
-			log2M = mWindow.addToHistory("Log 10 transform", 
-					MatrixOperation.transform().min(1).log10().to(minM));
-		default:
-			log2M = minM;
-			break;
-		}
-		 */
+    DataFrame log2M;
 
-		switch (dialog.getIsLogTransformed()) {
-		case 1:
-			log2M = mWindow.addToHistory("Log 2 transform", 
-					MatrixOperation.transform().log2().to(minM));
-			break;
-		case 2:
-			log2M = mWindow.addToHistory("Log 10 transform", 
-					MatrixOperation.transform().log10().to(minM));
-			break;
-		default:
-			log2M = minM;
-			break;
-		}
+    /*
+     * switch (dialog.getIsLogTransformed()) { case 1: log2M =
+     * mWindow.addToHistory("Log 2 transform",
+     * MatrixOperation.transform().min(1).log2().to(minM)); break; case 2: log2M =
+     * mWindow.addToHistory("Log 10 transform",
+     * MatrixOperation.transform().min(1).log10().to(minM)); default: log2M = minM;
+     * break; }
+     */
 
-		List<Double> sd = MatrixOperations.rowStdev(log2M);
+    switch (dialog.getIsLogTransformed()) {
+    case 1:
+      log2M = mWindow.addToHistory("Log 2 transform", MatrixOperation.transform().log2().to(minM));
+      break;
+    case 2:
+      log2M = mWindow.addToHistory("Log 10 transform", MatrixOperation.transform().log10().to(minM));
+      break;
+    default:
+      log2M = minM;
+      break;
+    }
 
-		// Index the sd
-		List<Indexed<Integer, Double>> sdIndexed = 
-				IndexedInt.index(sd);
+    List<Double> sd = MatrixOperations.rowStdev(log2M);
 
-		// Sort by stdev
-		//Collections.sort(sdIndexed);
+    // Index the sd
+    List<Indexed<Integer, Double>> sdIndexed = IndexedInt.index(sd);
 
-		// Sort the maxtrix rows
-		DataFrame stdM = 
-				DataFrame.copyInnerRowsIndexed(log2M, sdIndexed);
+    // Sort by stdev
+    // Collections.sort(sdIndexed);
 
-		sd = Indexed.values(sdIndexed);
+    // Sort the maxtrix rows
+    DataFrame stdM = DataFrame.copyInnerRowsIndexed(log2M, sdIndexed);
 
-		// Reindex
-		//sdIndexed = IndexedValueInt.index(sd);
+    sd = Indexed.values(sdIndexed);
 
-		// Add the stdev as annotation
-		stdM.setNumRowAnnotations("STDEV", sd);
+    // Reindex
+    // sdIndexed = IndexedValueInt.index(sd);
 
-		mWindow.addToHistory("STDEV", stdM);
+    // Add the stdev as annotation
+    stdM.setNumRowAnnotations("STDEV", sd);
 
-		// Filter by min exp
-		sdIndexed = MathUtils.min(sdIndexed, minStd);
+    mWindow.addToHistory("STDEV", stdM);
 
-		if (sdIndexed.size() > 0) {
+    // Filter by min exp
+    sdIndexed = MathUtils.min(sdIndexed, minStd);
 
-			DataFrame stdevFilterM = 
-					mWindow.addToHistory("Keep STDEV >= " + minStd,
-							DataFrame.copyInnerRowsIndexed(stdM, sdIndexed)); // new StdDevFilterMatrixView(mlog2, minStd));
+    if (sdIndexed.size() > 0) {
 
-			DataFrame rowZTransM = 
-					mWindow.addToHistory("Row z-score transform", 
-							MatrixOperations.rowZscore(stdevFilterM)); // new RowZTransformMatrixView(mstdevfilter));
+      DataFrame stdevFilterM = mWindow.addToHistory("Keep STDEV >= " + minStd,
+          DataFrame.copyInnerRowsIndexed(stdM, sdIndexed)); // new StdDevFilterMatrixView(mlog2, minStd));
 
-			boolean plot = dialog.getCreatePlot();
+      DataFrame rowZTransM = mWindow.addToHistory("Row z-score transform", MatrixOperations.rowZscore(stdevFilterM)); // new
+                                                                                                                      // RowZTransformMatrixView(mstdevfilter));
 
+      boolean plot = dialog.getCreatePlot();
 
-			
-			if (plot) {
-				LegacyClusterModule.cluster(mWindow,
-						rowZTransM, 
-						distanceMetric,
-						linkage, 
-						dialog.clusterRows(),
-						dialog.clusterColumns(),
-						dialog.optimalLeafOrder(),
-						new HeatMapProperties());
-			}
+      if (plot) {
+        LegacyClusterModule.cluster(mWindow, rowZTransM, distanceMetric, linkage, dialog.clusterRows(),
+            dialog.clusterColumns(), dialog.optimalLeafOrder(), new HeatMapProperties());
+      }
 
-			mWindow.addToHistory("Results", stdevFilterM); 
-		} else {
-			ModernMessageDialog.createWarningDialog(mWindow, 
-					"The matrix is empty after filtering.");
-		}
-	}
+      mWindow.addToHistory("Results", stdevFilterM);
+    } else {
+      ModernMessageDialog.createWarningDialog(mWindow, "The matrix is empty after filtering.");
+    }
+  }
 }

@@ -4,4 +4,5 @@
 /user.colormaps.json
 /user.settings.json
 /*log*
-/.settings/
+.settings/
+/.classpath

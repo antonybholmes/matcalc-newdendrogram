@@ -38,40 +38,34 @@ import org.jebtk.modern.window.ModernRibbonWindow;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotWindow;
 
 /**
- * Merges designated segments together using the merge column. Consecutive rows with the same
- * merge id will be merged together. Coordinates and copy number will be adjusted but
- * genes, cytobands etc are not.
+ * Merges designated segments together using the merge column. Consecutive rows
+ * with the same merge id will be merged together. Coordinates and copy number
+ * will be adjusted but genes, cytobands etc are not.
  *
  * @author Antony Holmes Holmes
  *
  */
-public class NewDendrogramPlotWindow extends HeatMapPlotWindow  {
-	private static final long serialVersionUID = 1L;
+public class NewDendrogramPlotWindow extends HeatMapPlotWindow {
+  private static final long serialVersionUID = 1L;
 
-	/**
-	 * Instantiates a new pattern discovery plot window.
-	 *
-	 * @param appInfo the app info
-	 * @param matrix the matrix
-	 * @param comparisonGroups the comparison groups
-	 * @param groups the all groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public NewDendrogramPlotWindow(ModernRibbonWindow window,
-			DataFrame matrix,
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(window,
-				"New Dendrogram",
-				matrix, 
-				groups,
-				rowGroups,
-				countGroups,
-				history,
-				properties);
-	}
+  /**
+   * Instantiates a new pattern discovery plot window.
+   *
+   * @param appInfo
+   *          the app info
+   * @param matrix
+   *          the matrix
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param groups
+   *          the all groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public NewDendrogramPlotWindow(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups,
+      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
+    super(window, "New Dendrogram", matrix, groups, rowGroups, countGroups, history, properties);
+  }
 }

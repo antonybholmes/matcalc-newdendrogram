@@ -44,44 +44,31 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotMatrixTra
  *
  */
 public class NewDendrogramPlotMatrixTransform extends HeatMapPlotMatrixTransform {
-	
-	/**
-	 * Instantiates a new pattern discovery plot matrix transform.
-	 *
-	 * @param parent the parent
-	 * @param inputMatrix the input matrix
-	 * @param comparisonGroups the comparison groups
-	 * @param groups the groups
-	 * @param history the history
-	 * @param properties the properties
-	 */
-	public NewDendrogramPlotMatrixTransform(ModernRibbonWindow parent,
-			DataFrame inputMatrix, 
-			XYSeriesModel groups,
-			XYSeriesModel rowGroups,
-			CountGroups countGroups,
-			List<String> history,
-			Properties properties) {
-		super(parent,
-				"Create New Dendrogram Plot",
-				inputMatrix, 
-				groups,
-				rowGroups,
-				countGroups,
-				history,
-				properties);
-	}
 
-	/**
-	@Override
-	public ModernWindow createWindow() {
-		return newDendrogramPlotWindow(mParent,
-				mInputMatrix,
-				mGroups,
-				mRowGroups,
-				mCountGroups,
-				mHistory,
-				mProperties);
-	}
-	*/
+  /**
+   * Instantiates a new pattern discovery plot matrix transform.
+   *
+   * @param parent
+   *          the parent
+   * @param inputMatrix
+   *          the input matrix
+   * @param comparisonGroups
+   *          the comparison groups
+   * @param groups
+   *          the groups
+   * @param history
+   *          the history
+   * @param properties
+   *          the properties
+   */
+  public NewDendrogramPlotMatrixTransform(ModernRibbonWindow parent, DataFrame inputMatrix, XYSeriesModel groups,
+      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
+    super(parent, "Create New Dendrogram Plot", inputMatrix, groups, rowGroups, countGroups, history, properties);
+  }
+
+  /**
+   * @Override public ModernWindow createWindow() { return
+   *           newDendrogramPlotWindow(mParent, mInputMatrix, mGroups, mRowGroups,
+   *           mCountGroups, mHistory, mProperties); }
+   */
 }
