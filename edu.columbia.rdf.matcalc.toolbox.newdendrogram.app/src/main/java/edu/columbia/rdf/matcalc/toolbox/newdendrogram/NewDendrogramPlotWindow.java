@@ -51,21 +51,17 @@ public class NewDendrogramPlotWindow extends HeatMapPlotWindow {
   /**
    * Instantiates a new pattern discovery plot window.
    *
-   * @param appInfo
-   *          the app info
-   * @param matrix
-   *          the matrix
-   * @param comparisonGroups
-   *          the comparison groups
-   * @param groups
-   *          the all groups
-   * @param history
-   *          the history
-   * @param properties
-   *          the properties
+   * @param appInfo the app info
+   * @param matrix the matrix
+   * @param comparisonGroups the comparison groups
+   * @param groups the all groups
+   * @param history the history
+   * @param properties the properties
    */
-  public NewDendrogramPlotWindow(ModernRibbonWindow window, DataFrame matrix, XYSeriesModel groups,
-      XYSeriesModel rowGroups, CountGroups countGroups, List<String> history, Properties properties) {
-    super(window, "New Dendrogram", matrix, groups, rowGroups, countGroups, history, properties);
+  public NewDendrogramPlotWindow(ModernRibbonWindow window, DataFrame matrix,
+      XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
+      List<String> history, Properties properties) {
+    super(window, "New Dendrogram", matrix, groups, rowGroups, countGroups,
+        history, properties);
   }
 }

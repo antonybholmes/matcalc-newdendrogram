@@ -10,7 +10,6 @@ import org.jebtk.math.MathUtils;
 import org.jebtk.math.cluster.DistanceMetric;
 import org.jebtk.math.cluster.Linkage;
 import org.jebtk.math.matrix.DataFrame;
-import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperation;
 import org.jebtk.math.matrix.utils.MatrixOperations;
 import org.jebtk.modern.UIService;
@@ -26,7 +25,8 @@ import edu.columbia.rdf.matcalc.toolbox.newdendrogram.app.NewDendrogramIcon;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy.LegacyClusterModule;
 
-public class NewDendrogramModule extends CalcModule implements ModernClickListener {
+public class NewDendrogramModule extends CalcModule
+    implements ModernClickListener {
   private MainMatCalcWindow mWindow;
 
   public static final String NAME = "NewDendrogram";
@@ -44,7 +44,8 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
         UIService.getInstance().loadIcon(NewDendrogramIcon.class, 24), NAME,
         "Cluster rows and columns using the New Dendrogam method.");
     button.addClickListener(this);
-    mWindow.getRibbon().getToolbar("Classification").getSection("Classifier").add(button);
+    mWindow.getRibbon().getToolbar("Classification").getSection("Classifier")
+        .add(button);
   }
 
   @Override
@@ -88,9 +89,11 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
     DataFrame minM;
 
     if (dialog.getUseMinExp()) {
-      minM = mWindow.addToHistory("Minimum expression", Double.toString(minExp), MatrixOperations.min(m, minExp)); // new
-                                                                                                                   // MinThresholdMatrixView(m,
-                                                                                                                   // minExp));
+      minM = mWindow.addToHistory("Minimum expression",
+          Double.toString(minExp),
+          MatrixOperations.min(m, minExp)); // new
+                                            // MinThresholdMatrixView(m,
+                                            // minExp));
     } else {
       minM = m;
     }
@@ -100,18 +103,20 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
     /*
      * switch (dialog.getIsLogTransformed()) { case 1: log2M =
      * mWindow.addToHistory("Log 2 transform",
-     * MatrixOperation.transform().min(1).log2().to(minM)); break; case 2: log2M =
-     * mWindow.addToHistory("Log 10 transform",
-     * MatrixOperation.transform().min(1).log10().to(minM)); default: log2M = minM;
-     * break; }
+     * MatrixOperation.transform().min(1).log2().to(minM)); break; case 2: log2M
+     * = mWindow.addToHistory("Log 10 transform",
+     * MatrixOperation.transform().min(1).log10().to(minM)); default: log2M =
+     * minM; break; }
      */
 
     switch (dialog.getIsLogTransformed()) {
     case 1:
-      log2M = mWindow.addToHistory("Log 2 transform", MatrixOperation.transform().log2().to(minM));
+      log2M = mWindow.addToHistory("Log 2 transform",
+          MatrixOperation.transform().log2().to(minM));
       break;
     case 2:
-      log2M = mWindow.addToHistory("Log 10 transform", MatrixOperation.transform().log10().to(minM));
+      log2M = mWindow.addToHistory("Log 10 transform",
+          MatrixOperation.transform().log10().to(minM));
       break;
     default:
       log2M = minM;
@@ -145,21 +150,31 @@ public class NewDendrogramModule extends CalcModule implements ModernClickListen
     if (sdIndexed.size() > 0) {
 
       DataFrame stdevFilterM = mWindow.addToHistory("Keep STDEV >= " + minStd,
-          DataFrame.copyInnerRowsIndexed(stdM, sdIndexed)); // new StdDevFilterMatrixView(mlog2, minStd));
+          DataFrame.copyInnerRowsIndexed(stdM, sdIndexed)); // new
+                                                            // StdDevFilterMatrixView(mlog2,
+                                                            // minStd));
 
-      DataFrame rowZTransM = mWindow.addToHistory("Row z-score transform", MatrixOperations.rowZscore(stdevFilterM)); // new
-                                                                                                                      // RowZTransformMatrixView(mstdevfilter));
+      DataFrame rowZTransM = mWindow.addToHistory("Row z-score transform",
+          MatrixOperations.rowZscore(stdevFilterM)); // new
+                                                     // RowZTransformMatrixView(mstdevfilter));
 
       boolean plot = dialog.getCreatePlot();
 
       if (plot) {
-        LegacyClusterModule.cluster(mWindow, rowZTransM, distanceMetric, linkage, dialog.clusterRows(),
-            dialog.clusterColumns(), dialog.optimalLeafOrder(), new HeatMapProperties());
+        LegacyClusterModule.cluster(mWindow,
+            rowZTransM,
+            distanceMetric,
+            linkage,
+            dialog.clusterRows(),
+            dialog.clusterColumns(),
+            dialog.optimalLeafOrder(),
+            new HeatMapProperties());
       }
 
       mWindow.addToHistory("Results", stdevFilterM);
     } else {
-      ModernMessageDialog.createWarningDialog(mWindow, "The matrix is empty after filtering.");
+      ModernMessageDialog.createWarningDialog(mWindow,
+          "The matrix is empty after filtering.");
     }
   }
 }

@@ -47,19 +47,25 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
 
   private ModernComboBox mLinkageCombo = new ModernComboBox();
 
-  private CheckBox mClusterColumnsCheck = new ModernCheckSwitch("Cluster columns", true);
+  private CheckBox mClusterColumnsCheck = new ModernCheckSwitch(
+      "Cluster columns", true);
 
   private CheckBox mClusterRowsCheck = new ModernCheckSwitch("Cluster rows");
 
-  private CheckBox mCheckOptimalLeafOrder = new ModernCheckSwitch("Optimal leaf ordering", true);
+  private CheckBox mCheckOptimalLeafOrder = new ModernCheckSwitch(
+      "Optimal leaf ordering", true);
 
-  private ModernCompactSpinner mExpressionField = new ModernCompactSpinner(0, 10000, 10);
+  private ModernCompactSpinner mExpressionField = new ModernCompactSpinner(0,
+      10000, 10);
 
-  private ModernCompactSpinner mStdField = new ModernCompactSpinner(0, 10000, 1.5, 0.1);
+  private ModernCompactSpinner mStdField = new ModernCompactSpinner(0, 10000,
+      1.5, 0.1);
 
-  private CheckBox mCheckPlot = new ModernCheckSwitch(PlotConstants.MENU_PLOT, true);
+  private CheckBox mCheckPlot = new ModernCheckSwitch(PlotConstants.MENU_PLOT,
+      true);
 
-  private CheckBox mCheckReset = new ModernCheckSwitch(PlotConstants.MENU_RESET_HISTORY, false);
+  private CheckBox mCheckReset = new ModernCheckSwitch(
+      PlotConstants.MENU_RESET_HISTORY, false);
 
   public NewDendrogramDialog(ModernWindow parent) {
     super(parent, "newdendrogram.help.url");
@@ -99,10 +105,13 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
       break;
     }
 
-    mCheckMinExp.setSelected(SettingsService.getInstance().getAsBool("newdendrogram.min-exp-mode"));
+    mCheckMinExp.setSelected(
+        SettingsService.getInstance().getAsBool("newdendrogram.min-exp-mode"));
 
-    mExpressionField.setValue(SettingsService.getInstance().getAsDouble("newdendrogram.min-expression"));
-    mStdField.setValue(SettingsService.getInstance().getAsDouble("newdendrogram.min-stdev"));
+    mExpressionField.setValue(SettingsService.getInstance()
+        .getAsDouble("newdendrogram.min-expression"));
+    mStdField.setValue(
+        SettingsService.getInstance().getAsDouble("newdendrogram.min-stdev"));
 
     setSize(600, 600);
 
@@ -152,13 +161,17 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
   @Override
   public final void clicked(ModernClickEvent e) {
     if (e.getMessage().equals(UI.BUTTON_OK)) {
-      SettingsService.getInstance().update("newdendrogram.min-expression", mExpressionField.getValue());
+      SettingsService.getInstance().update("newdendrogram.min-expression",
+          mExpressionField.getValue());
 
-      SettingsService.getInstance().update("newdendrogram.min-stdev", mStdField.getValue());
+      SettingsService.getInstance().update("newdendrogram.min-stdev",
+          mStdField.getValue());
 
-      SettingsService.getInstance().update("newdendrogram.transform", getIsLogTransformed());
+      SettingsService.getInstance().update("newdendrogram.transform",
+          getIsLogTransformed());
 
-      SettingsService.getInstance().update("newdendrogram.min-exp-mode", mCheckMinExp.isSelected());
+      SettingsService.getInstance().update("newdendrogram.min-exp-mode",
+          mCheckMinExp.isSelected());
     }
 
     super.clicked(e);
