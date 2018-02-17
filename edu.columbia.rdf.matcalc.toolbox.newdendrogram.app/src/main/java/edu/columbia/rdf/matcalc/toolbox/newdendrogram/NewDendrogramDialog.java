@@ -113,7 +113,7 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
     mStdField.setValue(
         SettingsService.getInstance().getAsDouble("newdendrogram.min-stdev"));
 
-    setSize(600, 600);
+    setSize(640, 640);
 
     UI.centerWindowToScreen(this);
   }
