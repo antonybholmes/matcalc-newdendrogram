@@ -155,7 +155,7 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
     box.add(UI.createVGap(20));
     box.add(mCheckPlot);
 
-    setDialogCardContent(box);
+    setCard(box);
   }
 
   @Override
