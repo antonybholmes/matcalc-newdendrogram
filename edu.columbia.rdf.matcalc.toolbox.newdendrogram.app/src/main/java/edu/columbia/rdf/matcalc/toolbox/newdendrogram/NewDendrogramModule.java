@@ -12,7 +12,7 @@ import org.jebtk.math.cluster.Linkage;
 import org.jebtk.math.matrix.DataFrame;
 import org.jebtk.math.matrix.utils.MatrixOperation;
 import org.jebtk.math.matrix.utils.MatrixOperations;
-import org.jebtk.modern.UIService;
+import org.jebtk.modern.AssetService;
 import org.jebtk.modern.dialog.ModernDialogStatus;
 import org.jebtk.modern.dialog.ModernMessageDialog;
 import org.jebtk.modern.event.ModernClickEvent;
@@ -41,7 +41,7 @@ public class NewDendrogramModule extends CalcModule
     mWindow = window;
 
     RibbonLargeButton button = new RibbonLargeButton(NAME,
-        UIService.getInstance().loadIcon(NewDendrogramIcon.class, 24), NAME,
+        AssetService.getInstance().loadIcon(NewDendrogramIcon.class, 24), NAME,
         "Cluster rows and columns using the New Dendrogam method.");
     button.addClickListener(this);
     mWindow.getRibbon().getToolbar("Classification").getSection("Classifier")

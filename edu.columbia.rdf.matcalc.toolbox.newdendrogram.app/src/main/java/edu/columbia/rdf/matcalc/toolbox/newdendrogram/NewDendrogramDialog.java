@@ -93,7 +93,7 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
     mDistanceCombo.addMenuItem("Pearson");
     mDistanceCombo.setSelectedIndex(3);
 
-    switch (SettingsService.getInstance().getAsInt("newdendrogram.transform")) {
+    switch (SettingsService.getInstance().getInt("newdendrogram.transform")) {
     case 1:
       mCheckLog2.doClick();
       break;
@@ -106,12 +106,12 @@ public class NewDendrogramDialog extends ModernDialogHelpWindow {
     }
 
     mCheckMinExp.setSelected(
-        SettingsService.getInstance().getAsBool("newdendrogram.min-exp-mode"));
+        SettingsService.getInstance().getBool("newdendrogram.min-exp-mode"));
 
     mExpressionField.setValue(SettingsService.getInstance()
-        .getAsDouble("newdendrogram.min-expression"));
+        .getDouble("newdendrogram.min-expression"));
     mStdField.setValue(
-        SettingsService.getInstance().getAsDouble("newdendrogram.min-stdev"));
+        SettingsService.getInstance().getDouble("newdendrogram.min-stdev"));
 
     setSize(640, 640);
 
