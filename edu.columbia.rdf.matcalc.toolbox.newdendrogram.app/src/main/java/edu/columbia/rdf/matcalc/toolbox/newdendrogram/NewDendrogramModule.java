@@ -20,12 +20,12 @@ import org.jebtk.modern.event.ModernClickListener;
 import org.jebtk.modern.ribbon.RibbonLargeButton;
 
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
-import edu.columbia.rdf.matcalc.toolbox.CalcModule;
+import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.newdendrogram.app.NewDendrogramIcon;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy.LegacyClusterModule;
 
-public class NewDendrogramModule extends CalcModule
+public class NewDendrogramModule extends Module
     implements ModernClickListener {
   private MainMatCalcWindow mWindow;
 
@@ -89,7 +89,7 @@ public class NewDendrogramModule extends CalcModule
     DataFrame minM;
 
     if (dialog.getUseMinExp()) {
-      minM = mWindow.addToHistory("Minimum expression",
+      minM = mWindow.history().addToHistory("Minimum expression",
           Double.toString(minExp),
           MatrixOperations.min(m, minExp)); // new
                                             // MinThresholdMatrixView(m,
@@ -102,20 +102,20 @@ public class NewDendrogramModule extends CalcModule
 
     /*
      * switch (dialog.getIsLogTransformed()) { case 1: log2M =
-     * mWindow.addToHistory("Log 2 transform",
+     * mWindow.history().addToHistory("Log 2 transform",
      * MatrixOperation.transform().min(1).log2().to(minM)); break; case 2: log2M
-     * = mWindow.addToHistory("Log 10 transform",
+     * = mWindow.history().addToHistory("Log 10 transform",
      * MatrixOperation.transform().min(1).log10().to(minM)); default: log2M =
      * minM; break; }
      */
 
     switch (dialog.getIsLogTransformed()) {
     case 1:
-      log2M = mWindow.addToHistory("Log 2 transform",
+      log2M = mWindow.history().addToHistory("Log 2 transform",
           MatrixOperation.transform().log2().to(minM));
       break;
     case 2:
-      log2M = mWindow.addToHistory("Log 10 transform",
+      log2M = mWindow.history().addToHistory("Log 10 transform",
           MatrixOperation.transform().log10().to(minM));
       break;
     default:
@@ -142,19 +142,19 @@ public class NewDendrogramModule extends CalcModule
     // Add the stdev as annotation
     stdM.setRowAnnotations("STDEV", sd.toArray());
 
-    mWindow.addToHistory("STDEV", stdM);
+    mWindow.history().addToHistory("STDEV", stdM);
 
     // Filter by min exp
     sdIndexed = MathUtils.min(sdIndexed, minStd);
 
     if (sdIndexed.size() > 0) {
 
-      DataFrame stdevFilterM = mWindow.addToHistory("Keep STDEV >= " + minStd,
+      DataFrame stdevFilterM = mWindow.history().addToHistory("Keep STDEV >= " + minStd,
           DataFrame.copyInnerRowsIndexed(stdM, sdIndexed)); // new
                                                             // StdDevFilterMatrixView(mlog2,
                                                             // minStd));
 
-      DataFrame rowZTransM = mWindow.addToHistory("Row z-score transform",
+      DataFrame rowZTransM = mWindow.history().addToHistory("Row z-score transform",
           MatrixOperations.rowZscore(stdevFilterM)); // new
                                                      // RowZTransformMatrixView(mstdevfilter));
 
@@ -171,7 +171,7 @@ public class NewDendrogramModule extends CalcModule
             new HeatMapProperties());
       }
 
-      mWindow.addToHistory("Results", stdevFilterM);
+      mWindow.history().addToHistory("Results", stdevFilterM);
     } else {
       ModernMessageDialog.createWarningDialog(mWindow,
           "The matrix is empty after filtering.");
