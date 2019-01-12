@@ -140,7 +140,7 @@ public class NewDendrogramModule extends Module
     // sdIndexed = IndexedValueInt.index(sd);
 
     // Add the stdev as annotation
-    stdM.setRowAnnotations("STDEV", sd.toArray());
+    stdM.getIndex().setAnnotation("STDEV", sd.toArray());
 
     mWindow.history().addToHistory("STDEV", stdM);
 

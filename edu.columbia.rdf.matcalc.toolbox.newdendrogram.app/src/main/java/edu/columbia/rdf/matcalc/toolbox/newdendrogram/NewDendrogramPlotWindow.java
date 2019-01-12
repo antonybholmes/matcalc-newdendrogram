@@ -42,7 +42,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotWindow;
  * with the same merge id will be merged together. Coordinates and copy number
  * will be adjusted but genes, cytobands etc are not.
  *
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class NewDendrogramPlotWindow extends HeatMapPlotWindow {

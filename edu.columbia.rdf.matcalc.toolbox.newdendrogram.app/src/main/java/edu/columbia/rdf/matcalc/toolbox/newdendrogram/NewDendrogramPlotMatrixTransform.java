@@ -40,7 +40,7 @@ import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.legacy.HeatMapPlotMatrixTra
 /**
  * Transform the rows of a matrix.
  * 
- * @author Antony Holmes Holmes
+ * @author Antony Holmes
  *
  */
 public class NewDendrogramPlotMatrixTransform
