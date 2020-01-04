@@ -15,6 +15,7 @@ import org.jebtk.math.cluster.ManhattanDistanceMetric;
 import org.jebtk.math.cluster.MaximumDistanceMetric;
 import org.jebtk.math.cluster.PearsonDistanceMetric;
 import org.jebtk.math.cluster.SingleLinkage;
+import org.jebtk.modern.ModernWidget;
 import org.jebtk.modern.UI;
 import org.jebtk.modern.button.CheckBox;
 import org.jebtk.modern.button.ModernButtonGroup;
@@ -26,7 +27,6 @@ import org.jebtk.modern.event.ModernClickEvent;
 import org.jebtk.modern.panel.HExpandBox;
 import org.jebtk.modern.panel.VBox;
 import org.jebtk.modern.spinner.ModernCompactSpinner;
-import org.jebtk.modern.widget.ModernWidget;
 import org.jebtk.modern.window.ModernWindow;
 import org.jebtk.modern.window.WindowWidgetFocusEvents;
 
