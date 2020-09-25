@@ -29,7 +29,7 @@ package edu.columbia.rdf.matcalc.toolbox.newdendrogram;
 
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.DataFrame;
@@ -60,7 +60,7 @@ public class NewDendrogramPlotWindow extends HeatMapPlotWindow {
    */
   public NewDendrogramPlotWindow(ModernRibbonWindow window, DataFrame matrix,
       XYSeriesModel groups, XYSeriesModel rowGroups, CountGroups countGroups,
-      List<String> history, Properties properties) {
+      List<String> history, Props properties) {
     super(window, "New Dendrogram", matrix, groups, rowGroups, countGroups,
         history, properties);
   }

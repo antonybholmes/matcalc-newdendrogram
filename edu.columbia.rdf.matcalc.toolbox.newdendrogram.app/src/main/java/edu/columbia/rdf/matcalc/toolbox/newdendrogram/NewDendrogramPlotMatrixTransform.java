@@ -29,7 +29,7 @@ package edu.columbia.rdf.matcalc.toolbox.newdendrogram;
 
 import java.util.List;
 
-import org.jebtk.core.Properties;
+import org.jebtk.core.Props;
 import org.jebtk.graphplot.figure.heatmap.legacy.CountGroups;
 import org.jebtk.graphplot.figure.series.XYSeriesModel;
 import org.jebtk.math.matrix.DataFrame;
@@ -58,7 +58,7 @@ public class NewDendrogramPlotMatrixTransform
    */
   public NewDendrogramPlotMatrixTransform(ModernRibbonWindow parent,
       DataFrame inputMatrix, XYSeriesModel groups, XYSeriesModel rowGroups,
-      CountGroups countGroups, List<String> history, Properties properties) {
+      CountGroups countGroups, List<String> history, Props properties) {
     super(parent, "Create New Dendrogram Plot", inputMatrix, groups, rowGroups,
         countGroups, history, properties);
   }
