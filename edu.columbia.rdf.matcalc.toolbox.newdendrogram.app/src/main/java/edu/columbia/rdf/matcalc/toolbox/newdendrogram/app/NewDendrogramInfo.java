@@ -8,8 +8,7 @@ public class NewDendrogramInfo extends GuiAppInfo {
 
   public NewDendrogramInfo() {
     super("NewDendrogram", new AppVersion(2),
-        "Copyright (C) 2016-2016 Antony Holmes",
-        AssetService.getInstance().loadIcon(NewDendrogramIcon.class, 32),
+        "Copyright (C) 2016-${year} Antony Holmes",
         AssetService.getInstance().loadIcon(NewDendrogramIcon.class, 128));
   }
 

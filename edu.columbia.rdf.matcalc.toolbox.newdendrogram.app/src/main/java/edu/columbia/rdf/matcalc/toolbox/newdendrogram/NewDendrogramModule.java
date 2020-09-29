@@ -22,7 +22,7 @@ import org.jebtk.modern.ribbon.RibbonLargeButton;
 import edu.columbia.rdf.matcalc.MainMatCalcWindow;
 import edu.columbia.rdf.matcalc.toolbox.Module;
 import edu.columbia.rdf.matcalc.toolbox.newdendrogram.app.NewDendrogramIcon;
-import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProperties;
+import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.HeatMapProps;
 import edu.columbia.rdf.matcalc.toolbox.plot.heatmap.cluster.legacy.LegacyClusterModule;
 
 public class NewDendrogramModule extends Module
@@ -168,7 +168,7 @@ public class NewDendrogramModule extends Module
             dialog.clusterRows(),
             dialog.clusterColumns(),
             dialog.optimalLeafOrder(),
-            new HeatMapProperties());
+            new HeatMapProps());
       }
 
       mWindow.history().addToHistory("Results", stdevFilterM);
